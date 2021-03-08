@@ -1,0 +1,17 @@
+html, body
+{
+    width: 100%;
+    height: 100%;
+}
+
+body
+{
+    background-color: #eeeeee;
+}
+
+pre
+{
+    background-color: rgb(245, 235, 235);
+    padding: 12px;
+    font-family: monospace;
+}

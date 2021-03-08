@@ -1,0 +1,99 @@
+<?php
+
+namespace Controller;
+
+use Controller\Homepage;
+use \mysqli;
+use Model\Auto;
+use Model\Noleggi;
+
+class EntryPoint
+{
+    private $route;
+    private $connection;
+
+    public function __construct(string $route, mysqli $connection)
+    {
+        $this->route = $route;
+        $this->connection = $connection;
+    }
+
+    private function load_template(string $templatefile, array $variables)
+    {
+        $connection = $this->connection;
+        extract($variables);
+        ob_start();
+
+        include __DIR__ . "/../../templates/" . $templatefile;
+        return ob_get_clean();
+    }
+
+    public function load_page()
+    {
+        if ($this->route === "")
+        {
+            $c = new Homepage();
+
+            $page = $c->home();
+        }
+        else if ($this->route === "api")
+        {
+            if (!empty($_POST))
+            {
+                http_response_code(406);
+                exit;
+            }
+
+            $formato = isset($_GET['format'])
+                ? $_GET['format']
+                : "json";
+
+            $pk = isset($_GET['pk'])
+                ? $_GET['pk']
+                : null;
+            
+            $object = ucfirst(strtolower($_GET['get']));
+
+            switch ($object)
+            {
+                case "Auto":
+                    $model = new Auto($this->connection);
+                    echo $model->prendi($formato, $pk);
+                break;
+                case "Noleggi":
+                    $model = new Noleggi($this->connection);
+                    echo $model->prendi($formato, $pk);
+                break;
+            }
+
+            if ($formato === "json")
+            {
+                $formato = "application/json";
+            }
+            else if ($formato === "xml")
+            {
+                $formato = "application/xml";
+            }
+            else
+            {
+                $formato = "text/html";
+            }
+
+            header("Content-Type: " . $formato);
+
+            return;
+        }
+        else
+        {
+            http_response_code(404);
+            exit;
+        }
+
+        $output = $this->load_template($page['template'], $page['variables']);
+
+        extract($page['page_variables']);
+        $title = $page['title'];
+
+        include __DIR__ . "/../../templates/layout.html.php";
+    }
+}

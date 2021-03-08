@@ -1,0 +1,19 @@
+<IfModule mod_rewrite.c>
+Options +FollowSymLinks
+
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} api/(.*)/list [NC]
+RewriteRule ^.*$ /index.php/api/?get=%1 [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} api/(.*)/(.*) [NC]
+RewriteRule ^.*$ /index.php/api/?get=%1&pk=%2 [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^.*$ /index.php [NC,L,QSA]
+</IfModule>
