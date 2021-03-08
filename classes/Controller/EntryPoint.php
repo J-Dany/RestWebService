@@ -6,6 +6,7 @@ use Controller\Homepage;
 use \mysqli;
 use Model\Auto;
 use Model\Noleggi;
+use Model\Observation;
 
 class EntryPoint
 {
@@ -56,15 +57,12 @@ class EntryPoint
 
             switch ($object)
             {
-                case "Auto":
-                    $model = new Auto($this->connection);
-                    echo $model->prendi($formato, $pk);
-                break;
-                case "Noleggi":
-                    $model = new Noleggi($this->connection);
-                    echo $model->prendi($formato, $pk);
+                case "Observation":
+                    $model = new Observation($this->connection);
                 break;
             }
+
+            echo $model->prendi($formato, $pk);
 
             if ($formato === "json")
             {
@@ -79,7 +77,7 @@ class EntryPoint
                 $formato = "text/html";
             }
 
-            header("Content-Type: " . $formato);
+            header("Content-Type: $formato");
 
             return;
         }
