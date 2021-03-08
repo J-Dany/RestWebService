@@ -7,8 +7,8 @@ use \Model;
 
 class Observation extends Model
 {
-    public function prendi(string $formato, string $targa = null) : string
+    public function prendi(string $pk = null) : void
     {
-        return "";
+        
     }
 };

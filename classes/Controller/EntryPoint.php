@@ -61,7 +61,8 @@ class EntryPoint
                 break;
             }
 
-            echo $model->prendi($formato, $pk);
+            $model->prendi($pk);
+            echo $model->$formato();
 
             if ($formato === "json")
             {
@@ -77,6 +78,7 @@ class EntryPoint
             }
 
             header("Content-Type: $formato");
+
 
             return;
         }

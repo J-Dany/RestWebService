@@ -2,21 +2,27 @@
 
 abstract class Model
 {
-    private $connection;
+    private \mysqli_result $result;
+    private \mysqli $connection;
 
     public function __construct (\mysqli $connection)
     {
         $this->connection = $connection;
     }
 
-    public abstract function prendi (string $formato, string $pk = null) : string;
+    public abstract function prendi (string $pk = null) : void;
 
-    public function to_html (\mysqli_result $result) : string
+    public function html () : string
     {
         return "";
     }
 
-    public function to_xml (\mysqli_result $result) : string
+    public function xml () : string
+    {
+        return "";
+    }
+
+    public function json () : string
     {
         return "";
     }
