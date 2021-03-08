@@ -21,7 +21,6 @@ class EntryPoint
 
     private function load_template(string $templatefile, array $variables)
     {
-        $connection = $this->connection;
         extract($variables);
         ob_start();
 
