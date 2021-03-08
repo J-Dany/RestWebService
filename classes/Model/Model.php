@@ -4,7 +4,7 @@ abstract class Model
 {
     private $connection;
 
-    public function __construct (?\mysqli $connection)
+    public function __construct (\mysqli $connection)
     {
         $this->connection = $connection;
     }
