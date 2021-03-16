@@ -4,7 +4,6 @@ namespace Controller;
 
 use Controller\Homepage;
 use \mysqli;
-use Model\Model;
 use Model\Observation;
 
 class EntryPoint
@@ -69,11 +68,11 @@ class EntryPoint
             switch ($object)
             {
                 case "Observation":
-                    $model = new Observation($this->connection);
+                    $model = new Observation($this->connection, $object, "time");
                 break;
             }
 
-            $model->prendi($pk);
+            $model->api_prendi($pk);
             echo $model->$f();
 
             exit;
