@@ -16,4 +16,4 @@ if (substr($route, 0, 3) === "api")
 }
 
 $entry_point = new EntryPoint($route, $connection);
-$entry_point->load_page();
+$entry_point->loadPage();

@@ -3,10 +3,18 @@
 namespace Model;
 
 use Model\Model;
-use \mysqli;
-use \mysqli_result;
 
 class Observation extends Model
 {
-    
+    public function prendiDati ($pk = null) : void
+    {
+        if (is_null($pk))
+        {
+            $this->prendiTutto();
+        }
+        else
+        {
+            $this->prendi($pk);
+        }
+    }
 };

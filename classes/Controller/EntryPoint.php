@@ -17,7 +17,7 @@ class EntryPoint
         $this->connection = $connection;
     }
 
-    private function load_template(string $templatefile, array $variables)
+    private function loadTemplate(string $templatefile, array $variables)
     {
         extract($variables);
         ob_start();
@@ -26,7 +26,7 @@ class EntryPoint
         return ob_get_clean();
     }
 
-    public function load_page()
+    public function loadPage()
     {
         if ($this->route === "")
         {
@@ -72,7 +72,7 @@ class EntryPoint
                 break;
             }
 
-            $model->api_prendi($pk);
+            $model->prendiDati($pk);
             echo $model->$f();
 
             exit;
@@ -83,7 +83,7 @@ class EntryPoint
             exit;
         }
 
-        $output = $this->load_template($page['template'], $page['variables']);
+        $output = $this->loadTemplate($page['template'], $page['variables']);
 
         extract($page['page_variables']);
         $title = $page['title'];

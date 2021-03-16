@@ -23,21 +23,27 @@ abstract class Model
         $this->settaQueryInserimento();
     }
 
-    public function prendi ($pk) : \mysqli_result
+    protected function prendi ($pk) : \mysqli_result
     {
         $query = "SELECT * FROM '$this->name' WHERE '$this->pk' = '$pk'";
 
-        return $this->connection->query($query);
+        $result = $this->connection->query($query);
+        $this->result = $result;
+
+        return $result;
     }
 
-    public function prendiTutto () : \mysqli_result
+    protected function prendiTutto () : \mysqli_result
     {
         $query = "SELECT * FROM '$this->name'";
 
-        return $this->connection->query($query);
+        $result = $this->connection->query($query);
+        $this->result = $result;
+
+        return $result;
     }
 
-    public function inserisci (array $values) : void
+    protected function inserisci (array $values) : void
     {
         try
         {
@@ -69,7 +75,7 @@ abstract class Model
         }
     }
 
-    public function elimina ($pk) : void
+    protected function elimina ($pk) : void
     {
         try
         {
@@ -86,12 +92,12 @@ abstract class Model
     }
 
     // TODO
-    public function aggiorna ($pk) : void
+    protected function aggiorna ($pk) : void
     {
 
     }
 
-    public function api_prendi ($pk = null) : void
+    protected function api_prendi ($pk = null) : void
     {
         $query = "";
 
