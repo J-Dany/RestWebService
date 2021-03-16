@@ -61,7 +61,7 @@ abstract class Model
                 }
                 else if (is_float($value))
                 {
-
+                    $stmt->bind_param("d", $value);
                 }
             }
 
