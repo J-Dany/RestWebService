@@ -1,29 +1,30 @@
 <?php
 
+namespace Model;
+
+use \mysqli;
+use \mysqli_result;
+
 abstract class Model
 {
-    private \mysqli_result $result;
-    private \mysqli $connection;
-
-    public function __construct (\mysqli $connection)
-    {
-        $this->connection = $connection;
-    }
+    protected \mysqli_result $result;
+    protected \mysqli $connection;
 
     public abstract function prendi (string $pk = null) : void;
 
-    public function html () : string
-    {
-        return "";
-    }
-
     public function xml () : string
     {
+        // TODO: implementare xml
         return "";
     }
 
     public function json () : string
     {
-        return "";
+        if ($this->result->num_rows === 1)
+        {
+            return json_encode($this->result->fetch_assoc());
+        }
+
+        return json_encode($this->result->fetch_all(MYSQLI_ASSOC));
     }
 };

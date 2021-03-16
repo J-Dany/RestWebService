@@ -4,8 +4,7 @@ namespace Controller;
 
 use Controller\Homepage;
 use \mysqli;
-use Model\Auto;
-use Model\Noleggi;
+use Model\Model;
 use Model\Observation;
 
 class EntryPoint
@@ -72,13 +71,8 @@ class EntryPoint
             {
                 $formato = "application/xml";
             }
-            else
-            {
-                $formato = "text/html";
-            }
 
             header("Content-Type: $formato");
-
 
             return;
         }
