@@ -4,6 +4,7 @@ namespace Model;
 
 use \mysqli;
 use \mysqli_result;
+use \SimpleXMLElement;
 
 abstract class Model
 {
@@ -14,8 +15,30 @@ abstract class Model
 
     public function xml () : string
     {
-        // TODO: implementare xml
-        return "";
+        if ($this->result->num_rows === 1)
+        {
+            $xml = new \SimpleXMLElement("<temperatura />");
+
+            foreach ($this->result->fetch_assoc() as $key => $value)
+            {
+                $xml->addChild($key, $value);
+            }
+        }
+        else
+        {
+            $xml = new \SimpleXMLElement("<temperature />");
+
+            foreach ($this->result->fetch_all(MYSQLI_ASSOC) as $key => $value)
+            {
+                $child = $xml->addChild("temperatura");
+                foreach ($value as $k => $v)
+                {
+                    $child->addChild($k, $v);
+                }
+            }
+        }
+
+        return $xml->asXML();
     }
 
     public function json () : string

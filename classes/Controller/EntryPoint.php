@@ -50,18 +50,8 @@ class EntryPoint
             $pk = isset($_GET['pk'])
                 ? $_GET['pk']
                 : null;
-            
-            $object = ucfirst(strtolower($_GET['get']));
 
-            switch ($object)
-            {
-                case "Observation":
-                    $model = new Observation($this->connection);
-                break;
-            }
-
-            $model->prendi($pk);
-            echo $model->$formato();
+            $f = $formato;
 
             if ($formato === "json")
             {
@@ -74,7 +64,19 @@ class EntryPoint
 
             header("Content-Type: $formato");
 
-            return;
+            $object = ucfirst(strtolower($_GET['get']));
+
+            switch ($object)
+            {
+                case "Observation":
+                    $model = new Observation($this->connection);
+                break;
+            }
+
+            $model->prendi($pk);
+            echo $model->$f();
+
+            exit;
         }
         else
         {
