@@ -12,7 +12,9 @@ abstract class Model
         $this->dbtable = new \DatabaseTable($connection, $name, $pk);
     }
 
-    public abstract function prendi ($pk = null) : void;
+    public abstract function prendi ($pk);
+
+    public abstract function apiPrendi ($pk = null) : void;
 
     public function xml () : string
     {

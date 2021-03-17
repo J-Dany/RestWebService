@@ -3,11 +3,11 @@
 // TODO
 class DatabaseTable
 {
-    protected $columns;
-    protected $pk;
-    protected $name;
-    protected $result;
-    protected $connection;
+    private $columns;
+    private $pk;
+    private $name;
+    private $result;
+    private $connection;
     private $insertQuery;
 
     public function __construct (\mysqli $connection, string $pk, string $name)

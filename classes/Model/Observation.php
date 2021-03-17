@@ -6,15 +6,15 @@ use Model\Model;
 
 class Observation extends Model
 {
-    public function prendiDati ($pk = null) : void
+    // TODO
+    public function prendi ($pk)
     {
-        if (is_null($pk))
-        {
-            $this->prendiTutto();
-        }
-        else
-        {
-            $this->prendi($pk);
-        }
+
+    }
+
+    // TODO
+    public function apiPrendi ($pk = null) : void
+    {
+
     }
 };
